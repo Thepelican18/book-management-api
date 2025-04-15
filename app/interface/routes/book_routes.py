@@ -1,12 +1,13 @@
 from typing import Optional, List
-from fastapi import APIRouter
+from fastapi import APIRouter, Depends, Security
 
 from application.services.book_service import BookService
 from config import PathConfig
 from infrastructure.repositories.pickle_book_repository import PickleBookRepository
 from interface.schemas.book_schema import CreateBook,GetBook, UpdateBook
+from interface.dependencies.api_auth import get_api_key
 
-book_router = APIRouter(prefix="/books")
+book_router = APIRouter(prefix="/books",dependencies=[Depends(get_api_key)])
 
 @book_router.post("/", response_model=GetBook)
 async def create_book(book: CreateBook):
