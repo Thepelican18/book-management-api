@@ -1,4 +1,6 @@
 from abc import ABC, abstractmethod
+from typing import List
+
 from domain.models.book import Book
 
 class BookRepository(ABC):
@@ -16,4 +18,8 @@ class BookRepository(ABC):
 
     @abstractmethod
     def delete(self, isbn: str) -> None:
+        pass
+    
+    @abstractmethod
+    def search(self, title: str, author: str) -> List[Book]:
         pass

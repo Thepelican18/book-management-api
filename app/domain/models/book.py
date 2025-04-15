@@ -3,7 +3,7 @@ from domain.value_objects.isbn import ISBN
 
 class Book:
     def __init__(self, isbn: ISBN, title: str, author: str, publication_year: int, pages: int):
-        self._validate(isbn, title, author, publication_year, pages)
+        self._validate(title, author, publication_year, pages)
 
         self.isbn = isbn
         self.title = title

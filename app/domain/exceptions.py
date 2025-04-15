@@ -24,9 +24,7 @@ class InvalidISBNError(DomainError):
         super().__init__(self.detail)
 
 class BookNotFound(DomainError):
-    def __init__(self, isbn: str):
-        self.detail = f"Book with ISBN {isbn} not found"
-        super().__init__(self.detail)
+    pass
 
 class BookAlreadyExists(DomainError):
     def __init__(self, isbn: str):

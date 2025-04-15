@@ -1,9 +1,10 @@
+from typing import Optional, List
 from fastapi import APIRouter
 
 from application.services.book_service import BookService
 from config import PathConfig
 from infrastructure.repositories.pickle_book_repository import PickleBookRepository
-from interface.schemas.book_schema import CreateBook,GetBook, UpdateBook, DeleteBook
+from interface.schemas.book_schema import CreateBook,GetBook, UpdateBook
 
 book_router = APIRouter(prefix="/books")
 
@@ -18,6 +19,12 @@ async def create_book(book: CreateBook):
         pages=book.pages
     )
     return book_domain
+
+@book_router.get("/search", response_model=List[GetBook])
+async def search_books(title: Optional[str] = None, author: Optional[str] = None):
+    book_service = BookService(repository=PickleBookRepository(file_path=PathConfig.PICKLE_PATH))
+    books = book_service.search_books(title=title, author=author)
+    return books
 
 @book_router.get("/{isbn}", response_model=GetBook)
 async def get_book(isbn: str):
@@ -42,3 +49,4 @@ async def delete_book(isbn: str):
     book_service = BookService(repository=PickleBookRepository(file_path=PathConfig.PICKLE_PATH))
     book_service.delete_book(isbn)
     return {"message": f"Book with ISBN {isbn} has been deleted"}
+

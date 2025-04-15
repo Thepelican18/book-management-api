@@ -1,5 +1,6 @@
 import os
 import pickle
+from typing import Optional, List
 
 from domain.repositories.book_repository  import BookRepository
 from domain.models.book import Book
@@ -35,3 +36,12 @@ class PickleBookRepository(BookRepository):
         if isbn in self.books:
             del self.books[isbn]
             self._save()
+
+    def search(self, title: Optional[str] = None, author: Optional[str] = None) -> List[Book]:
+        books = self.books.values()
+        if title:
+            results = [book for book in books if title.lower() in book.title.lower()]
+        if author:
+            results = [book for book in books if author.lower() in book.author.lower()]
+        return results
+    
