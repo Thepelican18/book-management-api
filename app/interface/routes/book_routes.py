@@ -37,8 +37,8 @@ async def update_book(isbn: str, book: UpdateBook):
     )
     return updated_book
 
-@book_router.delete("/")
-async def delete_book(book: DeleteBook):
+@book_router.delete("/{isbn}")
+async def delete_book(isbn: str):
     book_service = BookService(repository=PickleBookRepository(file_path=PathConfig.PICKLE_PATH))
-    book_service.delete_book(book.isbn)
-    return {"message": f"Book with ISBN {book.isbn} has been deleted"}
+    book_service.delete_book(isbn)
+    return {"message": f"Book with ISBN {isbn} has been deleted"}

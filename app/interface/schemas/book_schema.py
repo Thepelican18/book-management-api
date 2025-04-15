@@ -20,7 +20,4 @@ class UpdateBook(BaseModel):
     publication_year: int
     pages: int
 
-class DeleteBook(BaseModel):
-    isbn: str
-
   
