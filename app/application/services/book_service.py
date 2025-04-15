@@ -1,6 +1,6 @@
-from app.domain.repositories.book_repository import BookRepository
-from app.domain.models.book import Book
-from app.domain.exceptions import BookNotFound
+from domain.repositories.book_repository import BookRepository
+from domain.models.book import Book
+from domain.exceptions import BookNotFound
 
 
 class BookService:

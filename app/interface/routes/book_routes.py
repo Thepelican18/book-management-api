@@ -1,9 +1,9 @@
 from fastapi import APIRouter
 
-from app.application.services.book_service import BookService
-from app.config import PathConfig
-from app.infrastructure.repositories.pickle_book_repository import PickleBookRepository
-from app.interface.schemas.book_schema import CreateBook,GetBook, UpdateBook, DeleteBook
+from application.services.book_service import BookService
+from config import PathConfig
+from infrastructure.repositories.pickle_book_repository import PickleBookRepository
+from interface.schemas.book_schema import CreateBook,GetBook, UpdateBook, DeleteBook
 
 book_router = APIRouter(prefix="/books")
 

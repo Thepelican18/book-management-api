@@ -1,8 +1,8 @@
 import os
 import pickle
 
-from app.domain.repositories.book_repository  import BookRepository
-from app.domain.models.book import Book
+from domain.repositories.book_repository  import BookRepository
+from domain.models.book import Book
 
 class PickleBookRepository(BookRepository):
 
