@@ -1,6 +1,7 @@
 class DomainError(Exception):
-    """Base class"""
-    pass
+    def __init__(self, detail: str):
+        self.detail = detail
+        super().__init__(self.detail)
 
 class InvalidISBNError(DomainError):
     pass
@@ -17,5 +18,15 @@ class InvalidPublicationYearError(DomainError):
 class InvalidPagesError(DomainError):
     pass
 
-class BookNotFound(DomainError):
+class InvalidBookData(DomainError):
     pass
+
+class BookNotFound(DomainError):
+    def __init__(self, isbn: str):
+        self.detail = f"Book with ISBN {isbn} not found"
+        super().__init__(self.detail)
+
+class BookAlreadyExists(DomainError):
+    def __init__(self, isbn: str):
+        self.detail = f"A book with ISBN {isbn} already exists."
+        super().__init__(self.detail)

@@ -3,9 +3,9 @@ class ServerConfig:
     API_PORT = 5080
     API_WORKERS = 1
 
-    CORS_ORIGINS = "*"
-    CORS_METHODS = "*"
-    CORS_HEADERS = "*"
+    CORS_ORIGINS = ["*"]
+    CORS_METHODS = ["GET","POST","PUT","DELETE"]
+    CORS_HEADERS = ["*"]
     CORS_CREDENTIALS = True
 
 class PathConfig:
