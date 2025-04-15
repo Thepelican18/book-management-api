@@ -1,7 +1,8 @@
-from domain.exceptions import InvalidISBNError, InvalidTitleError, InvalidAuthorError, InvalidPublicationYearError, InvalidPagesError
+from domain.exceptions import InvalidTitleError, InvalidAuthorError, InvalidPublicationYearError, InvalidPagesError
+from domain.value_objects.isbn import ISBN
 
 class Book:
-    def __init__(self, isbn: str, title: str, author: str, publication_year: int, pages: int):
+    def __init__(self, isbn: ISBN, title: str, author: str, publication_year: int, pages: int):
         self._validate(isbn, title, author, publication_year, pages)
 
         self.isbn = isbn
@@ -10,9 +11,7 @@ class Book:
         self.publication_year = publication_year
         self.pages = pages
 
-    def _validate(self, isbn, title, author, publication_year, pages):
-        if not isbn:
-            raise InvalidISBNError("ISBN must not be empty.")
+    def _validate(self, title, author, publication_year, pages):
         if not title:
             raise InvalidTitleError("Title must not be empty.")
         if not author:

@@ -3,9 +3,6 @@ class DomainError(Exception):
         self.detail = detail
         super().__init__(self.detail)
 
-class InvalidISBNError(DomainError):
-    pass
-
 class InvalidTitleError(DomainError):
     pass
 
@@ -20,6 +17,11 @@ class InvalidPagesError(DomainError):
 
 class InvalidBookData(DomainError):
     pass
+
+class InvalidISBNError(DomainError):
+    def __init__(self):
+        self.detail = f"ISBN must follow the format '978-0-452-28423-4'."
+        super().__init__(self.detail)
 
 class BookNotFound(DomainError):
     def __init__(self, isbn: str):

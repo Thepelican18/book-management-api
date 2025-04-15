@@ -5,7 +5,7 @@ from fastapi.responses import JSONResponse
 
 from config import ServerConfig
 from interface.routes.book_routes import book_router
-from domain.exceptions import BookNotFound, BookAlreadyExists
+from domain.exceptions import BookNotFound, BookAlreadyExists, InvalidISBNError
 
 def register_exception_handlers(app: FastAPI) -> None:
 
@@ -15,11 +15,16 @@ def register_exception_handlers(app: FastAPI) -> None:
             status_code=404,
             content={"detail": exc.detail}
         )
-
     @app.exception_handler(BookAlreadyExists)
     async def book_already_exists_handler(request: Request, exc: BookAlreadyExists):
         return JSONResponse(
             status_code=409,
+            content={"detail": exc.detail}
+        )
+    @app.exception_handler(InvalidISBNError)
+    async def book_invalid_isbn_handler(request: Request, exc: InvalidISBNError):
+        return JSONResponse(
+            status_code=400,
             content={"detail": exc.detail}
         )
     

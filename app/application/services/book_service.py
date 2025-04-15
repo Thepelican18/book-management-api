@@ -1,5 +1,6 @@
 from domain.repositories.book_repository import BookRepository
 from domain.models.book import Book
+from domain.value_objects.isbn import ISBN
 from domain.exceptions import BookNotFound, BookAlreadyExists
 
 
@@ -8,6 +9,7 @@ class BookService:
         self.repository = repository
 
     def create_book(self, title: str, author: str, publication_year: int, isbn: str, pages: int) -> Book:
+        isbn: ISBN = ISBN(isbn)
         if self.repository.get(isbn) is not None:
             raise BookAlreadyExists(isbn)
         book = Book(title=title, author=author, publication_year=publication_year, isbn=isbn, pages=pages)
@@ -15,12 +17,14 @@ class BookService:
         return book
 
     def get_book(self, isbn: str) -> Book:
+        isbn: ISBN  = ISBN(isbn)
         book = self.repository.get(isbn)
         if not book:
             raise BookNotFound(isbn)
         return book
 
     def update_book(self, isbn: str, title: str, author: str, publication_year: int, pages: int) -> Book:
+        isbn: ISBN  = ISBN(isbn)
         book = self.get_book(isbn)
         book.title = title
         book.author = author
