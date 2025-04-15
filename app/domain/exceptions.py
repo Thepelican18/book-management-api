@@ -16,3 +16,6 @@ class InvalidPublicationYearError(DomainError):
 
 class InvalidPagesError(DomainError):
     pass
+
+class BookNotFound(DomainError):
+    pass
